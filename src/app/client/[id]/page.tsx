@@ -219,15 +219,6 @@ export default function ClientDetailPage() {
           />
         </section>
 
-        {/* ── Performance Chart ─────────────────────────────── */}
-        <section className={styles.chartSection}>
-          <PerformanceChart
-            clients={state.clients}
-            type="single"
-            selectedClientId={client.id}
-          />
-        </section>
-
         {/* ── Winning Creative + Kill Candidates ───────────── */}
         <div className={styles.bottomGrid}>
           {/* Winning Creative */}
@@ -292,6 +283,15 @@ export default function ClientDetailPage() {
             </div>
           </div>
         </div>
+
+        {/* ── Performance Chart ─────────────────────────────── */}
+        <section className={styles.chartSection} style={{ animationDelay: '400ms' }}>
+          <PerformanceChart
+            clients={state.clients}
+            type="single"
+            selectedClientId={client.id}
+          />
+        </section>
       </main>
 
       {/* ── Modals ──────────────────────────────────────────── */}
