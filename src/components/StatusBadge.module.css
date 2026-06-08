@@ -1,0 +1,102 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.active {
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--success-light, #34d399);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.active .dot {
+  background: var(--success, #10b981);
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.5);
+}
+
+.paused {
+  background: rgba(100, 116, 139, 0.12);
+  color: var(--text-muted, #94a3b8);
+  border: 1px solid rgba(100, 116, 139, 0.2);
+}
+
+.paused .dot {
+  background: var(--text-muted, #64748b);
+  animation: none;
+}
+
+.review {
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--warning-light, #fbbf24);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.review .dot {
+  background: var(--warning, #f59e0b);
+  box-shadow: 0 0 6px rgba(245, 158, 11, 0.5);
+}
+
+.scaling {
+  background: rgba(132, 178, 219, 0.12);
+  color: var(--primary-light, #b6d8f4);
+  border: 1px solid rgba(132, 178, 219, 0.2);
+}
+
+.scaling .dot {
+  background: var(--primary, #84B2DB);
+  box-shadow: 0 0 6px rgba(132, 178, 219, 0.5);
+}
+
+.new {
+  background: rgba(168, 85, 247, 0.12);
+  color: #c084fc;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+.new .dot {
+  background: #a855f7;
+  box-shadow: 0 0 6px rgba(168, 85, 247, 0.5);
+}
+
+.needs_creatives {
+  background: rgba(251, 146, 60, 0.12);
+  color: #fb923c;
+  border: 1px solid rgba(251, 146, 60, 0.2);
+}
+
+.needs_creatives .dot {
+  background: #f97316;
+  box-shadow: 0 0 6px rgba(249, 115, 22, 0.5);
+}
+
+.attention {
+  background: rgba(244, 63, 94, 0.12);
+  color: #fb7185;
+  border: 1px solid rgba(244, 63, 94, 0.2);
+}
+
+.attention .dot {
+  background: #f43f5e;
+  box-shadow: 0 0 6px rgba(244, 63, 94, 0.5);
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.3); }
+}

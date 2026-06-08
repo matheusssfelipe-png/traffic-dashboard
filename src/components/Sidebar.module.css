@@ -1,0 +1,432 @@
+/* ===== Sidebar Layout ===== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 260px;
+  background: #0e0e16;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  --sidebar-width: 260px;
+}
+
+.sidebar.collapsed {
+  width: 72px;
+  --sidebar-width: 72px;
+}
+
+/* ===== Logo / Brand ===== */
+.logoSection {
+  padding: 24px 20px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 80px;
+  overflow: hidden;
+}
+
+.logoIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(132, 178, 219, 0.2), rgba(139, 92, 246, 0.15));
+  border: 1px solid rgba(132, 178, 219, 0.25);
+  color: #84B2DB;
+  transition: background 0.25s ease;
+}
+
+.sidebar:not(.collapsed) .logoIcon:hover {
+  background: linear-gradient(135deg, rgba(132, 178, 219, 0.3), rgba(139, 92, 246, 0.25));
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity 0.2s ease 0.1s;
+}
+
+.collapsed .logoText {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
+}
+
+.brandName {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #e2e8f0 0%, #84B2DB 60%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+}
+
+.brandSub {
+  font-size: 11px;
+  color: #64748b;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  margin-top: 2px;
+}
+
+/* ===== Navigation ===== */
+.nav {
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+}
+
+.navLabel {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #475569;
+  padding: 6px 10px 8px;
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity 0.2s ease 0.1s;
+}
+
+.collapsed .navLabel {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.navLink:hover {
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.navLink.active {
+  color: #c7d2fe;
+  background: rgba(132, 178, 219, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(132, 178, 219, 0.15);
+}
+
+.navLink.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60%;
+  border-radius: 0 3px 3px 0;
+  background: #84B2DB;
+}
+
+.navLinkIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.navLinkText {
+  opacity: 1;
+  transition: opacity 0.2s ease 0.1s;
+}
+
+.collapsed .navLinkText {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
+}
+
+/* ===== Client List Section ===== */
+.clientSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 12px 10px 0;
+}
+
+.clientSectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px 10px;
+  flex-shrink: 0;
+}
+
+.clientSectionTitle {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #475569;
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity 0.2s ease 0.1s;
+}
+
+.collapsed .clientSectionTitle {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.clientCount {
+  font-size: 10px;
+  font-weight: 600;
+  color: #64748b;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2px 7px;
+  border-radius: 10px;
+  opacity: 1;
+  transition: opacity 0.2s ease 0.1s;
+}
+
+.collapsed .clientCount {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.clientList {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding-right: 2px;
+}
+
+/* Custom scrollbar */
+.clientList::-webkit-scrollbar {
+  width: 4px;
+}
+
+.clientList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.clientList::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+}
+
+.clientList::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.clientItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 450;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+}
+
+.clientItem:hover {
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.clientItem.active {
+  color: #c7d2fe;
+  background: rgba(132, 178, 219, 0.1);
+}
+
+.statusDot {
+  width: 7px;
+  height: 7px;
+  min-width: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: box-shadow 0.2s ease;
+}
+
+.statusDot.dotActive {
+  background: #10b981;
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.45);
+}
+
+.statusDot.dotPaused {
+  background: #64748b;
+  box-shadow: 0 0 6px rgba(100, 116, 139, 0.3);
+}
+
+.statusDot.dotReview {
+  background: #f59e0b;
+  box-shadow: 0 0 6px rgba(245, 158, 11, 0.4);
+}
+
+.statusDot.dotScaling {
+  background: #84B2DB;
+  box-shadow: 0 0 6px rgba(132, 178, 219, 0.45);
+}
+
+.statusDot.dotNew {
+  background: #3b82f6;
+  box-shadow: 0 0 6px rgba(59, 130, 246, 0.4);
+}
+
+.statusDot.dotNeedsCreatives {
+  background: #f97316;
+  box-shadow: 0 0 6px rgba(249, 115, 22, 0.4);
+}
+
+.statusDot.dotAttention {
+  background: #f43f5e;
+  box-shadow: 0 0 6px rgba(244, 63, 94, 0.4);
+}
+
+.clientName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 1;
+  transition: opacity 0.2s ease 0.1s;
+}
+
+.collapsed .clientName {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
+}
+
+/* ===== Add Client Button ===== */
+.addSection {
+  padding: 12px 10px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1.5px dashed rgba(132, 178, 219, 0.3);
+  background: transparent;
+  color: #84B2DB;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: inherit;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.addButton:hover {
+  border-color: rgba(132, 178, 219, 0.55);
+  background: rgba(132, 178, 219, 0.06);
+  color: #b6d8f4;
+}
+
+.addButton:active {
+  transform: scale(0.97);
+}
+
+.addButtonText {
+  opacity: 1;
+  transition: opacity 0.2s ease 0.1s;
+}
+
+.collapsed .addButtonText {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
+}
+
+/* ===== Toggle Button ===== */
+.toggleButton {
+  position: absolute;
+  top: 28px;
+  right: -14px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #1a1a2e;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 101;
+  transition: all 0.2s ease;
+  padding: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.toggleButton:hover {
+  background: #252540;
+  color: #e2e8f0;
+  border-color: rgba(132, 178, 219, 0.3);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* ===== Tooltip (collapsed state) ===== */
+.tooltip {
+  position: absolute;
+  left: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: #1e1e30;
+  color: #e2e8f0;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 200;
+}
+
+.collapsed .navLink:hover .tooltip,
+.collapsed .clientItem:hover .tooltip {
+  opacity: 1;
+}

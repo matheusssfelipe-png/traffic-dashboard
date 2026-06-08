@@ -1,0 +1,119 @@
+.card {
+  position: relative;
+  background: rgba(18, 18, 26, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 24px;
+  overflow: hidden;
+  animation: slideUp 0.5s ease-out both;
+  transition: transform var(--transition-normal, 250ms) ease, border-color var(--transition-normal, 250ms) ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(132, 178, 219, 0.25);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(132, 178, 219, 0.1);
+  color: #b6d8f4;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #94a3b8;
+  letter-spacing: 0.01em;
+}
+
+.valueRow {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.delta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.deltaIcon {
+  font-size: 0.65rem;
+}
+
+.positive {
+  background: rgba(16, 185, 129, 0.12);
+  color: #34d399;
+}
+
+.negative {
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+}
+
+.neutral {
+  background: rgba(100, 116, 139, 0.12);
+  color: #94a3b8;
+}
+
+.info {
+  background: rgba(132, 178, 219, 0.12);
+  color: #b6d8f4;
+}
+
+.subtitle {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.glow {
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(132, 178, 219, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
