@@ -1,12 +1,13 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import type { ApexOptions } from 'apexcharts';
 import type { Client, HistoryEntry } from '@/types';
 import styles from './PerformanceChart.module.css';
 
 type ChartSeries = { name: string; data: number[] }[];
+type OverviewMode = 'cpl' | 'spend';
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
@@ -55,13 +56,19 @@ const sharedAxisStyle: ApexOptions = {
   },
 };
 
-function buildOverviewOptions(clients: Client[]): {
+function buildOverviewOptions(clients: Client[], mode: OverviewMode): {
   options: ApexOptions;
   series: ChartSeries;
 } {
   const categories = clients.map((c) => c.name);
-  const prevSeries = clients.map((c) => c.cpl.prev30d);
-  const currentSeries = clients.map((c) => c.cpl.current30d);
+
+  const prevSeries = mode === 'cpl'
+    ? clients.map((c) => c.cpl.prev30d)
+    : clients.map((c) => c.spend?.prev30d || 0);
+
+  const currentSeries = mode === 'cpl'
+    ? clients.map((c) => c.cpl.current30d)
+    : clients.map((c) => c.spend?.current30d || 0);
 
   const options: ApexOptions = {
     ...sharedAxisStyle,
@@ -69,7 +76,7 @@ function buildOverviewOptions(clients: Client[]): {
       ...sharedAxisStyle.chart,
       type: 'bar',
     },
-    colors: ['#64748b', '#84B2DB'],
+    colors: mode === 'cpl' ? ['#64748b', '#84B2DB'] : ['#64748b', '#10b981'],
     plotOptions: {
       bar: {
         borderRadius: 6,
@@ -107,8 +114,8 @@ function buildOverviewOptions(clients: Client[]): {
   };
 
   const series: ChartSeries = [
-    { name: 'Previous 30D', data: prevSeries },
-    { name: 'Current 30D', data: currentSeries },
+    { name: `Previous 30D`, data: prevSeries },
+    { name: `Current 30D`, data: currentSeries },
   ];
 
   return { options, series };
@@ -198,6 +205,8 @@ export default function PerformanceChart({
   type = 'overview',
   selectedClientId,
 }: PerformanceChartProps) {
+  const [overviewMode, setOverviewMode] = useState<OverviewMode>('cpl');
+
   const selectedClient = useMemo(() => {
     if (type === 'single' && selectedClientId) {
       return clients.find((c) => c.id === selectedClientId) ?? null;
@@ -207,7 +216,7 @@ export default function PerformanceChart({
 
   const { options, series, chartType } = useMemo(() => {
     if (type === 'overview') {
-      const { options: opts, series: ser } = buildOverviewOptions(clients);
+      const { options: opts, series: ser } = buildOverviewOptions(clients, overviewMode);
       return { options: opts, series: ser, chartType: 'bar' as const };
     }
 
@@ -217,7 +226,7 @@ export default function PerformanceChart({
     }
 
     return { options: {} as ApexOptions, series: [], chartType: 'area' as const };
-  }, [type, clients, selectedClient]);
+  }, [type, clients, selectedClient, overviewMode]);
 
   const hasData =
     type === 'overview'
@@ -226,7 +235,9 @@ export default function PerformanceChart({
 
   const titleText =
     type === 'overview'
-      ? 'CPL Comparison — All Clients'
+      ? overviewMode === 'cpl'
+        ? 'CPL Comparison — All Clients'
+        : 'Spend Comparison — All Clients'
       : `🏆 CPL History — ${selectedClient?.name ?? 'Client'} (Last 30D)`;
 
   const subtitleText =
@@ -241,14 +252,33 @@ export default function PerformanceChart({
           <h3 className={styles.title}>{titleText}</h3>
           <p className={styles.subtitle}>{subtitleText}</p>
         </div>
-        {hasData && (
-          <span className={styles.badge}>
-            <span className={styles.badgeDot} />
-            {type === 'overview'
-              ? `${clients.length} clients`
-              : `${selectedClient!.history.length} months`}
-          </span>
-        )}
+        <div className={styles.headerRight}>
+          {/* Toggle CPL/Spend — only for overview */}
+          {type === 'overview' && (
+            <div className={styles.toggle}>
+              <button
+                className={`${styles.toggleBtn} ${overviewMode === 'cpl' ? styles.toggleActive : ''}`}
+                onClick={() => setOverviewMode('cpl')}
+              >
+                CPL
+              </button>
+              <button
+                className={`${styles.toggleBtn} ${overviewMode === 'spend' ? styles.toggleActive : ''}`}
+                onClick={() => setOverviewMode('spend')}
+              >
+                Spend
+              </button>
+            </div>
+          )}
+          {hasData && (
+            <span className={styles.badge}>
+              <span className={styles.badgeDot} />
+              {type === 'overview'
+                ? `${clients.length} clients`
+                : `${selectedClient!.history.length} months`}
+            </span>
+          )}
+        </div>
       </div>
 
       {hasData ? (

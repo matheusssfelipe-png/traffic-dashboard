@@ -20,6 +20,13 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
+  gap: 12px;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .titleGroup {
@@ -99,6 +106,37 @@
   pointer-events: none;
 }
 
+/* ===== Toggle CPL/Spend ===== */
+.toggle {
+  display: flex;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  background: rgba(10, 10, 15, 0.5);
+}
+
+.toggleBtn {
+  padding: 5px 14px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748b;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 200ms ease;
+  font-family: inherit;
+  letter-spacing: 0.02em;
+}
+
+.toggleBtn:hover {
+  color: #94a3b8;
+}
+
+.toggleActive {
+  background: rgba(132, 178, 219, 0.15);
+  color: #b6d8f4;
+}
+
 @keyframes slideUp {
   from {
     opacity: 0;
@@ -138,5 +176,19 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
+  }
+
+  .headerRight {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    animation: none;
+  }
+  .badgeDot {
+    animation: none;
   }
 }

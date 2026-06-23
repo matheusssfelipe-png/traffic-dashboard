@@ -37,7 +37,7 @@ function useCountUp(target: number, duration: number = 1200, delay: number = 0):
 }
 
 export default function KPICard({ title, value, subtitle, delta, icon, invertColors = false, delay = 0 }: KPICardProps) {
-  const numericValue = typeof value === 'number' ? value : parseFloat(value) || 0;
+  const numericValue = typeof value === 'number' ? value : 0;
   const animatedValue = useCountUp(numericValue, 1200, delay);
 
   const getDeltaClass = () => {
@@ -52,7 +52,7 @@ export default function KPICard({ title, value, subtitle, delta, icon, invertCol
     return delta > 0 ? '▲' : '▼';
   };
 
-  const displayValue = typeof value === 'string' ? value : animatedValue.toFixed(2);
+  const displayValue = typeof value === 'string' ? value : Math.round(animatedValue).toString();
 
   return (
     <div className={styles.card} style={{ animationDelay: `${delay}ms` }}>

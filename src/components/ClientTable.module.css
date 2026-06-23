@@ -18,10 +18,49 @@
   margin: 0;
 }
 
+/* ===== Search Bar ===== */
+.searchWrapper {
+  position: relative;
+  flex: 0 1 260px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #64748b;
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 8px 12px 8px 36px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(18, 18, 26, 0.6);
+  color: #f1f5f9;
+  font-size: 0.82rem;
+  font-family: inherit;
+  outline: none;
+  transition: all 200ms ease;
+}
+
+.searchInput::placeholder {
+  color: #64748b;
+}
+
+.searchInput:focus {
+  border-color: rgba(132, 178, 219, 0.4);
+  box-shadow: 0 0 0 3px rgba(132, 178, 219, 0.08);
+}
+
+/* ===== Filters ===== */
 .filters {
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .filterBtn {
@@ -63,6 +102,7 @@
   background: rgba(132, 178, 219, 0.2);
 }
 
+/* ===== Table ===== */
 .tableContainer {
   overflow-x: auto;
   border-radius: 12px;
@@ -75,7 +115,7 @@
 .table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 900px;
+  min-width: 1050px;
 }
 
 .th {
@@ -116,6 +156,7 @@
   color: #b6d8f4;
 }
 
+/* ===== Rows ===== */
 .row {
   animation: fadeInRow 0.4s ease-out both;
   transition: background 200ms ease;
@@ -162,12 +203,51 @@
   white-space: nowrap;
 }
 
+.offerRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
 .offer {
-  display: block;
   color: #94a3b8;
   font-size: 0.8rem;
 }
 
+/* ===== Platform Badges ===== */
+.platformBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.platformMeta {
+  background: rgba(59, 130, 246, 0.12);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.platformGoogle {
+  background: rgba(34, 197, 94, 0.12);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.platformBoth {
+  background: rgba(168, 85, 247, 0.12);
+  color: #c084fc;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+/* ===== CPL Cells ===== */
 .cplCell {
   display: flex;
   flex-direction: column;
@@ -186,6 +266,7 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* ===== Delta Badges ===== */
 .deltaValue {
   display: inline-flex;
   align-items: center;
@@ -224,32 +305,18 @@
   color: #94a3b8;
 }
 
-.creative {
-  max-width: 200px;
+/* ===== Sparkline ===== */
+.sparkline {
+  display: block;
+  opacity: 0.85;
+  transition: opacity 200ms;
 }
 
-.creativeName {
-  font-size: 0.8rem;
-  color: #94a3b8;
-  line-height: 1.3;
+.row:hover .sparkline {
+  opacity: 1;
 }
 
-.viewLink {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  color: #64748b;
-  transition: all 200ms ease;
-}
-
-.viewLink:hover {
-  background: rgba(132, 178, 219, 0.1);
-  color: #b6d8f4;
-}
-
+/* ===== Kill Badge ===== */
 .killBadge {
   display: inline-flex;
   align-items: center;
@@ -270,19 +337,58 @@
   font-size: 0.85rem;
 }
 
-.empty {
-  padding: 48px 24px;
-  text-align: center;
+/* ===== View Link ===== */
+.viewLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
   color: #64748b;
-  font-size: 0.9rem;
+  transition: all 200ms ease;
 }
 
+.viewLink:hover {
+  background: rgba(132, 178, 219, 0.1);
+  color: #b6d8f4;
+}
+
+/* ===== Empty State ===== */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 56px 24px;
+  text-align: center;
+}
+
+.emptyIcon {
+  font-size: 2rem;
+  opacity: 0.6;
+  margin-bottom: 4px;
+}
+
+.emptyTitle {
+  font-size: 0.95rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.emptySubtitle {
+  font-size: 0.82rem;
+  color: #64748b;
+}
+
+/* ===== Loading ===== */
 .loading {
   padding: 48px;
   text-align: center;
   color: #64748b;
 }
 
+/* ===== Animations ===== */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -298,3 +404,41 @@
     transform: translateX(0);
   }
 }
+
+/* ===== Reduced Motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  .wrapper,
+  .row {
+    animation: none;
+  }
+  .sparkline,
+  .viewLink,
+  .filterBtn,
+  .searchInput {
+    transition: none;
+  }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .searchWrapper {
+    flex: 1;
+  }
+
+  .filters {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .filterBtn {
+    flex-shrink: 0;
+  }
+}
+

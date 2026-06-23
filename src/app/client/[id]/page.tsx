@@ -107,7 +107,7 @@ export default function ClientDetailPage() {
     <div className={styles.layout}>
       <Sidebar onAddClient={() => setShowAddForm(true)} />
 
-      <main className={styles.main}>
+      <main id="client-detail-main" className={styles.main}>
         {/* ── Breadcrumb ────────────────────────────────────── */}
         <nav className={styles.breadcrumb}>
           <Link href="/" className={styles.backLink}>
@@ -146,7 +146,7 @@ export default function ClientDetailPage() {
             </Link>
             <button
               className={styles.exportBtn}
-              onClick={() => downloadReportAsPdf('dashboard-main')}
+              onClick={() => downloadReportAsPdf('client-detail-main')}
             >
               <Download size={16} />
               Export PDF

@@ -397,7 +397,7 @@
 .tabMeta {
   composes: tabActive;
   background: #84B2DB !important;
-  box-shadow: 0 4px 14px rgba(132, 178, 219, 0.04) 0%,;
+  box-shadow: 0 4px 14px rgba(132, 178, 219, 0.35);
 }
 
 .tabGoogle {

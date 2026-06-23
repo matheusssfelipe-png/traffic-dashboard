@@ -3,6 +3,7 @@
 import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import { X, Save, Trash2, Plus, Skull } from 'lucide-react';
 import { useStore } from '@/store';
+import { useToast } from '@/components/Toast';
 import type { Client, Platform, ClientStatus, CPLMetrics, SpendMetrics, KillCandidate, PlatformData } from '@/types';
 import styles from './ClientForm.module.css';
 
@@ -38,6 +39,7 @@ const DEFAULT_METRICS = { prev30d: 0, current30d: 0, prev7d: 0, current7d: 0 };
 
 export default function ClientForm({ client, onClose }: ClientFormProps) {
   const { addClient, updateClient, deleteClient } = useStore();
+  const { showToast } = useToast();
   const isEditing = Boolean(client);
 
   // ── Core Form State ─────────────────────────────────────────
@@ -207,8 +209,10 @@ export default function ClientForm({ client, onClose }: ClientFormProps) {
 
       if (isEditing && client) {
         updateClient(client.id, clientData);
+        showToast(`${name.trim()} updated successfully`, 'success');
       } else {
         addClient(clientData);
+        showToast(`${name.trim()} added successfully`, 'success');
       }
 
       onClose();
@@ -228,10 +232,12 @@ export default function ClientForm({ client, onClose }: ClientFormProps) {
   // ── Delete Handler ──────────────────────────────────────────
   const handleDelete = useCallback(() => {
     if (client) {
+      const clientName = client.name;
       deleteClient(client.id);
+      showToast(`${clientName} deleted`, 'error');
       onClose();
     }
-  }, [client, deleteClient, onClose]);
+  }, [client, deleteClient, onClose, showToast]);
 
   // ── Close on Escape ─────────────────────────────────────────
   useEffect(() => {

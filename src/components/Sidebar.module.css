@@ -430,3 +430,38 @@
 .collapsed .clientItem:hover .tooltip {
   opacity: 1;
 }
+
+/* ===== Mobile Responsive ===== */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 260px;
+    transform: translateX(-100%);
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .sidebar:not(.collapsed) {
+    transform: translateX(0);
+  }
+
+  .sidebar.collapsed {
+    width: 260px;
+    transform: translateX(-100%);
+  }
+
+  .toggleButton {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    right: auto;
+    z-index: 102;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar {
+    transition: none;
+  }
+}

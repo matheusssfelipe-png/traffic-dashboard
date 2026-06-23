@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
   LayoutDashboard,
-  Users,
   PlusCircle,
   Activity,
   ChevronLeft,
@@ -84,16 +83,6 @@ export default function Sidebar({ onAddClient }: SidebarProps) {
           {collapsed && <span className={styles.tooltip}>Overview</span>}
         </Link>
 
-        <Link
-          href="/"
-          className={`${styles.navLink} ${pathname === '/clients' ? styles.active : ''}`}
-        >
-          <span className={styles.navLinkIcon}>
-            <Users size={18} />
-          </span>
-          <span className={styles.navLinkText}>Clients</span>
-          {collapsed && <span className={styles.tooltip}>Clients</span>}
-        </Link>
       </nav>
 
       {/* Client list */}

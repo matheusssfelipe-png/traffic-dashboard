@@ -63,8 +63,8 @@ export default function Home() {
           />
           <KPICard
             title="Total Spend 30D"
-            value={`SEK ${summary.totalSpend30d.toLocaleString('sv-SE')}`}
-            subtitle={`Avg CPL: SEK ${summary.avgCPL30d.toFixed(2)}`}
+            value={`${summary.totalSpend30d.toLocaleString('sv-SE')} kr`}
+            subtitle={`Avg CPL: ${summary.avgCPL30d.toFixed(2)} kr`}
             icon={<DollarSign size={20} />}
             delay={100}
           />
